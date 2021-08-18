@@ -5,7 +5,10 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { AuthController } from './auth/auth.controller';
-
+import { ConferenceEventsModule } from './conference-events/conference-events.module';
+import { ConferenceEvent } from './conference-events/conference-event.entity';
+import { ConferenceScreen } from './conference-screens/conference-screen.entity';
+import { ConferenceScreensModule } from './conference-screens/conference-screen.module';
 
 @Module({
   imports: [
@@ -16,9 +19,9 @@ import { AuthController } from './auth/auth.controller';
       username: 'postgres',
       password: '1',
       database: 'cms-screens',
-      entities: [User],
+      entities: [User, ConferenceEvent, ConferenceScreen],
       synchronize: true,
-    }), UsersModule, AuthModule
+    }), UsersModule, ConferenceEventsModule, ConferenceScreensModule, AuthModule
   ],
   controllers: [
     AppController, AuthController

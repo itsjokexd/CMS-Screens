@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, BeforeInsert, BeforeUpdate, Timestamp, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, BeforeInsert, BeforeUpdate, Timestamp, CreateDateColumn, ManyToOne } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { ConferenceEvent } from 'src/conference-events/conference-event.entity';
 
 
 @Entity()
@@ -15,7 +16,7 @@ export class User {
   password: string;
 
   @CreateDateColumn()
-  createdDate: Date;
+  created_date: Date;
 
   @BeforeInsert()
   async encryptPasswordBeforeInsert(){
@@ -30,4 +31,9 @@ export class User {
     const hashedPassword = await bcrypt.hash(this.password, saltRounds);
     this.password = hashedPassword;
   }
+
+  @OneToMany((type) => ConferenceEvent, conferenceEvents => conferenceEvents.user, {
+    cascade : true,
+  })
+  conferenceEvents: ConferenceEvent[];
 }
