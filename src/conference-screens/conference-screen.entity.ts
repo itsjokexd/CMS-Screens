@@ -1,6 +1,7 @@
 import { ConferenceEvent } from 'src/conference-events/conference-event.entity';
+import { Playlist } from 'src/playlists/playlist.entity';
 import { User } from 'src/users/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, BeforeInsert, BeforeUpdate, Timestamp, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, BeforeInsert, BeforeUpdate, Timestamp, CreateDateColumn, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class ConferenceScreen {
@@ -21,4 +22,7 @@ export class ConferenceScreen {
         onDelete: 'CASCADE',
       })
     conferenceEvent: ConferenceEvent;
+
+    @OneToOne(() => Playlist, (playlist: Playlist) => playlist.conferenceScreen)
+    public playlist: Playlist;
 }

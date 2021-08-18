@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConferenceScreen } from './conference-screen.entity';
-import { ConferenceScreensService } from './conference-screen.service';
-import { ConferenceScreensController } from './conference-screen.controller';
+import { ConferenceScreensService } from './conference-screens.service';
+import { ConferenceScreensController } from './conference-screens.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ConferenceScreen])],

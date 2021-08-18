@@ -21,7 +21,7 @@ export class ConferenceEvent {
     end_date: Date;
 
     @CreateDateColumn()
-    created_date: Date;
+    created_at: Date;
 
     @ManyToOne((type) => User, user => user.conferenceEvents, {
         onDelete: 'CASCADE',

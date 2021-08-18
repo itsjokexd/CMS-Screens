@@ -16,7 +16,7 @@ export class User {
   password: string;
 
   @CreateDateColumn()
-  created_date: Date;
+  created_at: Date;
 
   @BeforeInsert()
   async encryptPasswordBeforeInsert(){

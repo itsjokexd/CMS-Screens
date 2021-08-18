@@ -5,7 +5,7 @@ import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { ConferenceScreen } from "./conference-screen.entity";
 import { CreateConferenceScreenDTO } from "./create-conference-screen.dto";
 import { UpdateConferenceScreenDTO } from "./update-conference-screen.dto";
-import { ConferenceScreensService } from "./conference-screen.service";
+import { ConferenceScreensService } from "./conference-screens.service";
 import { CreateConferenceScreenGuard } from "./guards/create-conference-screen.guard";
 import { ConferenceScreenOwnerGuard } from "./guards/conference-screen-owner.guard";
 
