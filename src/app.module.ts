@@ -11,6 +11,10 @@ import { ConferenceScreen } from './conference-screens/conference-screen.entity'
 import { ConferenceScreensModule } from './conference-screens/conference-screens.module';
 import { Playlist } from './playlists/playlist.entity';
 import { PlaylistsModule } from './playlists/playlists.module';
+import { PlaylistsContent } from './playlists-content/playlists-content.entity';
+import { PlaylistsContentModule } from './playlists-content/playlists-content.module';
+import { Content } from './content/content.entity';
+import { ContentModule } from './content/content.module';
 
 @Module({
   imports: [
@@ -21,9 +25,10 @@ import { PlaylistsModule } from './playlists/playlists.module';
       username: 'postgres',
       password: '1',
       database: 'cms-screens',
-      entities: [User, ConferenceEvent, ConferenceScreen, Playlist],
+      entities: [User, ConferenceEvent, ConferenceScreen, Playlist, Content, PlaylistsContent],
       synchronize: true,
-    }), UsersModule, ConferenceEventsModule, ConferenceScreensModule, PlaylistsModule, AuthModule
+    }), UsersModule, ConferenceEventsModule, ConferenceScreensModule, 
+    PlaylistsModule, ContentModule, PlaylistsContentModule, AuthModule
   ],
   controllers: [
     AppController, AuthController

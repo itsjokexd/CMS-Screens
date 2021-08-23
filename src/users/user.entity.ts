@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, BeforeInsert, BeforeUpdate, Timestamp, CreateDateColumn, ManyToOne } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { ConferenceEvent } from 'src/conference-events/conference-event.entity';
+import { Content } from 'src/content/content.entity';
 
 
 @Entity()
@@ -36,4 +37,9 @@ export class User {
     cascade : true,
   })
   conferenceEvents: ConferenceEvent[];
+
+  @OneToMany((type) => Content, content => content.user, {
+    cascade : true,
+  })
+  content: Content[];
 }
