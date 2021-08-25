@@ -14,6 +14,7 @@ export class PlaylistOwnerGuard implements CanActivate {
       
       const request = context.switchToHttp().getRequest();
   
+      // REVU:
       try{
         await playlistRepo.findOneOrFail(request.params.id) 
       }

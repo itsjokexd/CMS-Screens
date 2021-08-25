@@ -1,6 +1,6 @@
 import { IsNotEmpty } from "class-validator";
 
-export class UpdateConferenceScreenDTO{
+export class UpdateConferenceScreenDTO {
 
     @IsNotEmpty()
     name: string;

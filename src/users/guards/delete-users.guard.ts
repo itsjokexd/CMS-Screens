@@ -2,6 +2,7 @@ import { Injectable, CanActivate, ExecutionContext, BadRequestException } from '
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
+// REVU: UserOwnerGuard
 export class DeleteUsersGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 

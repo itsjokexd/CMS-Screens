@@ -1,7 +1,7 @@
 import { IsDateString, IsNotEmpty } from "class-validator";
 
 export class UpdateConferenceEventDTO {
-
+    // REVU: Сделать поля поля опциональными
     @IsNotEmpty()
     name: string;
 

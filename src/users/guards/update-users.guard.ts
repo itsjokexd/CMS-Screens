@@ -4,6 +4,7 @@ import { getRepository, Not } from 'typeorm';
 import { User } from '../user.entity';
 
 @Injectable()
+// REVU: Можно разделить на 2 гуарда(UserOwnerGuard, FreeUsernameGuard - лучше пайпа)
 export class UpdateUsersGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 

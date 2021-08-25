@@ -1,7 +1,7 @@
 import { IsDate, IsDateString, IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateConferenceEventDTO {
-    
+    // REVU: можно убрать
     @IsNumber()
     userId: number;
 

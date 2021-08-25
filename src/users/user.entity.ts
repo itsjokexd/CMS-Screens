@@ -13,6 +13,7 @@ export class User {
   @Column({unique : true})
   username: string;
 
+  // REVU: Добавить Exclude
   @Column()
   password: string;
 
@@ -20,12 +21,13 @@ export class User {
   created_at: Date;
 
   @BeforeInsert()
-  async encryptPasswordBeforeInsert(){
-    const saltRounds = 10;
+  async encryptPasswordBeforeInsert() {
+    const saltRounds = 10; // REVU: Вынести в константы
     const hashedPassword = await bcrypt.hash(this.password, saltRounds);
     this.password = hashedPassword;
   }
 
+  // REVU: Убрать
   @BeforeUpdate()
   async encryptPasswordBeforeUpdate(){
     const saltRounds = 10;

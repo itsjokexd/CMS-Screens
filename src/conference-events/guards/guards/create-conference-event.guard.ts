@@ -4,6 +4,7 @@ import { ConferenceEvent } from 'src/conference-events/conference-event.entity';
 import { getRepository } from 'typeorm';
 
 @Injectable()
+// REVU: Не нужный гуард
 export class CreateConferenceEventGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 

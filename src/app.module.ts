@@ -18,6 +18,7 @@ import { ContentModule } from './content/content.module';
 
 @Module({
   imports: [
+    // REVU: Вынести в константы
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

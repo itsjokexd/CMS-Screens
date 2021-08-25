@@ -13,6 +13,7 @@ export class ContentOwnerGuard implements CanActivate {
       
       const request = context.switchToHttp().getRequest();
   
+      // REVU:
       try{
         await contentRepo.findOneOrFail(request.params.id) 
       }

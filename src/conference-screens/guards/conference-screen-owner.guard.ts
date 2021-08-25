@@ -13,6 +13,7 @@ export class ConferenceScreenOwnerGuard implements CanActivate {
       
       const request = context.switchToHttp().getRequest();
   
+      // REVU: заменить на if
       try{
         await conferenceScreenRepo.findOneOrFail(request.params.id) 
       }

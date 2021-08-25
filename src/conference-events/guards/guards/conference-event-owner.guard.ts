@@ -2,7 +2,7 @@ import { Injectable, CanActivate, ExecutionContext, BadRequestException } from '
 import { Reflector } from '@nestjs/core';
 import { ConferenceEvent } from 'src/conference-events/conference-event.entity';
 import { getRepository } from 'typeorm';
-
+//  REVU: поправить директории(guards/guards)
 @Injectable()
 export class ConferenceEventOwnerGuard implements CanActivate {
     constructor(private reflector: Reflector) {}
@@ -12,6 +12,7 @@ export class ConferenceEventOwnerGuard implements CanActivate {
       
       const request = context.switchToHttp().getRequest();
   
+      // REVU: Переписать try catch
       try{
         await conferenceEventRepo.findOneOrFail(request.params.id) 
       }
