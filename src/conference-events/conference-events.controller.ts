@@ -3,10 +3,10 @@ import { Crud, CrudController } from "@nestjsx/crud";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { ConferenceEvent } from "./conference-event.entity";
-import { ConferenceEventOwnerGuard } from "./guards/guards/conference-event-owner.guard";
+import { ConferenceEventOwnerGuard } from "./guards/conference-event-owner.guard";
 import { CreateConferenceEventDTO } from "./create-conference-event.dto";
 import { ConferenceEventsService } from "./conference-events.service";
-import { CreateConferenceEventGuard } from "./guards/guards/create-conference-event.guard";
+import { CreateConferenceEventGuard } from "./guards/create-conference-event.guard";
 import { UpdateConferenceEventDTO } from "./update-conference-event.dto";
 
 @Crud({

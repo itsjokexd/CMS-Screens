@@ -13,11 +13,9 @@ export class PlaylistOwnerGuard implements CanActivate {
       const playlistRepo = getRepository(Playlist);
       
       const request = context.switchToHttp().getRequest();
-  
-      try{
-        await playlistRepo.findOneOrFail(request.params.id) 
-      }
-      catch (NotFoundException){
+      
+      const foundedPlaylist = await playlistRepo.findOne(request.params.id);
+      if (foundedPlaylist == undefined) {
         throw new BadRequestException(`Playlist with id = ${request.params.id} doesn't exist`)
       }
     

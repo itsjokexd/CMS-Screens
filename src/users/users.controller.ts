@@ -6,19 +6,22 @@ import { UsersService } from "./users.service";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { UpdateUsersDTO } from "./update-users.dto";
-import { UpdateUsersGuard } from "./guards/update-users.guard";
-import { DeleteUsersGuard } from "./guards/delete-users.guard";
+import { UserOwnerGuard } from "./guards/user-owner.guard";
+import { FreeUsernameGuard } from "./guards/free-username.guard";
 
 @Crud({
   model: {
     type: User,
   },
   routes:{
+    createOneBase:{
+      decorators:[UseGuards(FreeUsernameGuard)],
+    },
     updateOneBase:{
-      decorators:[UseGuards(JwtAuthGuard, UpdateUsersGuard), ApiBearerAuth()],
+      decorators:[UseGuards(JwtAuthGuard, UserOwnerGuard, FreeUsernameGuard), ApiBearerAuth()],
     },
     deleteOneBase:{
-      decorators:[UseGuards(JwtAuthGuard, DeleteUsersGuard), ApiBearerAuth()]
+      decorators:[UseGuards(JwtAuthGuard, UserOwnerGuard), ApiBearerAuth()]
     }, 
     exclude:["createManyBase", "replaceOneBase"],
   }, 

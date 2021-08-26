@@ -12,11 +12,9 @@ export class ContentOwnerGuard implements CanActivate {
       const contentRepo = getRepository(Content);
       
       const request = context.switchToHttp().getRequest();
-  
-      try{
-        await contentRepo.findOneOrFail(request.params.id) 
-      }
-      catch (NotFoundException){
+      
+      const foundedContent = await contentRepo.findOne(request.params.id);
+      if (foundedContent == undefined) {
         throw new BadRequestException(`Content with id = ${request.params.id} doesn't exist`)
       }
     

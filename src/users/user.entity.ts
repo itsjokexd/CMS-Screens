@@ -2,6 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, Unique, OneToMany, BeforeInsert
 import * as bcrypt from 'bcrypt';
 import { ConferenceEvent } from 'src/conference-events/conference-event.entity';
 import { Content } from 'src/content/content.entity';
+import { Exclude } from 'class-transformer';
+import { SALT_ROUNDS } from 'src/constants';
 
 
 @Entity()
@@ -13,6 +15,7 @@ export class User {
   @Column({unique : true})
   username: string;
 
+  @Exclude()
   @Column()
   password: string;
 
@@ -20,16 +23,8 @@ export class User {
   created_at: Date;
 
   @BeforeInsert()
-  async encryptPasswordBeforeInsert(){
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(this.password, saltRounds);
-    this.password = hashedPassword;
-  }
-
-  @BeforeUpdate()
-  async encryptPasswordBeforeUpdate(){
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(this.password, saltRounds);
+  async encryptPasswordBeforeInsert() {
+    const hashedPassword = await bcrypt.hash(this.password, SALT_ROUNDS);
     this.password = hashedPassword;
   }
 

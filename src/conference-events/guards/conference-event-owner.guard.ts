@@ -11,11 +11,9 @@ export class ConferenceEventOwnerGuard implements CanActivate {
       const conferenceEventRepo = getRepository(ConferenceEvent);
       
       const request = context.switchToHttp().getRequest();
-  
-      try{
-        await conferenceEventRepo.findOneOrFail(request.params.id) 
-      }
-      catch (NotFoundException){
+
+      const foundedEvent = await conferenceEventRepo.findOne(request.params.id);
+      if (foundedEvent == undefined) {
         throw new BadRequestException(`Conference event with id = ${request.params.id} doesn't exist`)
       }
     

@@ -16,27 +16,25 @@ export class PlaylistsContentOwnerGuard implements CanActivate {
       
       const request = context.switchToHttp().getRequest();
   
-      try{
-        await playlistsContentRepo.findOneOrFail(request.params.id) 
-      }
-      catch (NotFoundException){
+      const foundedPlaylistsContent = await playlistsContentRepo.findOne(request.params.id);
+      if (foundedPlaylistsContent == undefined) {
         throw new BadRequestException(`PlaylistsContent with id = ${request.params.id} doesn't exist`)
       }
     
-    const user = request.user;
-    const contentRepo = getRepository(Content);
-    const contentUserId = (await contentRepo.findOneOrFail(request.body.contentId)).userId;
+      const user = request.user;
+      const contentRepo = getRepository(Content);
+      const contentUserId = (await contentRepo.findOneOrFail(request.body.contentId)).userId;
 
-    const playlistRepo = getRepository(Playlist);
-    const conferenceScreenRepo = getRepository(ConferenceScreen);
-    const conferenceEventRepo = getRepository(ConferenceEvent);
-    const conferenceScreenId = (await playlistRepo.findOneOrFail(request.body.playlistId)).conferenceScreenId;
-    const eventId = (await conferenceScreenRepo.findOneOrFail(conferenceScreenId)).conferenceEventId;
-    const playlistsContentUserId = (await conferenceEventRepo.findOneOrFail(eventId)).userId;
+      const playlistRepo = getRepository(Playlist);
+      const conferenceScreenRepo = getRepository(ConferenceScreen);
+      const conferenceEventRepo = getRepository(ConferenceEvent);
+      const conferenceScreenId = (await playlistRepo.findOneOrFail(request.body.playlistId)).conferenceScreenId;
+      const eventId = (await conferenceScreenRepo.findOneOrFail(conferenceScreenId)).conferenceEventId;
+      const playlistsContentUserId = (await conferenceEventRepo.findOneOrFail(eventId)).userId;
 
-    if (contentUserId == user.id && playlistsContentUserId == user.id) {
-      return true;
-    }
+      if (contentUserId == user.id && playlistsContentUserId == user.id) {
+        return true;
+      }
       else throw new BadRequestException("You cannot edit/delete other users playlists content");
     }
 }

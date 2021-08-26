@@ -13,10 +13,8 @@ export class ConferenceScreenOwnerGuard implements CanActivate {
       
       const request = context.switchToHttp().getRequest();
   
-      try{
-        await conferenceScreenRepo.findOneOrFail(request.params.id) 
-      }
-      catch (NotFoundException){
+      const foundedScreen = await conferenceScreenRepo.findOne(request.params.id);
+      if (foundedScreen == undefined) {
         throw new BadRequestException(`Conference screen with id = ${request.params.id} doesn't exist`)
       }
     

@@ -15,16 +15,21 @@ import { PlaylistsContent } from './playlists-content/playlists-content.entity';
 import { PlaylistsContentModule } from './playlists-content/playlists-content.module';
 import { Content } from './content/content.entity';
 import { ContentModule } from './content/content.module';
+import { DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME, HOST } from 'src/constants';
+import * as dotenv from 'dotenv';
+
+//dotenv.config();
+
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '1',
-      database: 'cms-screens',
+      host: HOST,
+      port: DB_PORT,
+      username: DB_USERNAME,
+      password: DB_PASSWORD,
+      database: DB_NAME,
       entities: [User, ConferenceEvent, ConferenceScreen, Playlist, Content, PlaylistsContent],
       synchronize: true,
     }), UsersModule, ConferenceEventsModule, ConferenceScreensModule, 
